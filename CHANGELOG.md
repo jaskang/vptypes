@@ -1,3 +1,10 @@
+## [0.1.1](https://github.com/JasKang/vptypes/compare/0.1.0...0.1.1) (2021-01-27)
+
+
+### Bug Fixes
+
+* no need const ([c0d6d5a](https://github.com/JasKang/vptypes/commit/c0d6d5a166dd5b1d9217eb877be9bfbbabe71d75))
+
 # 0.1.0 (2021-01-27)
 
 
