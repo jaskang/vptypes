@@ -39,7 +39,7 @@ defineComponent({
 
     array: VpTypes.array<number[]>(),
     arrayDef: VpTypes.array<number[]>().def([1]),
-    arrayRequired: VpTypes.array().isRequired,
+    arrayRequired: VpTypes.array<number[]>().isRequired,
 
     func: VpTypes.func<() => boolean>(),
     funcDef: VpTypes.func<() => boolean>().def(() => true),
@@ -59,7 +59,7 @@ defineComponent({
 
     oneOfType: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()] as const),
     oneOfTypeDef: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()] as const).def('sdf'),
-    oneOfTypeRequired: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()] as const).isRequired,
+    oneOfTypeRequired: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()] as const).isRequired
   },
   setup(props) {
     expectType<string | undefined>(props.string)
@@ -70,7 +70,7 @@ defineComponent({
     expectType<number>(props.numberDef)
     expectType<number>(props.numberRequired)
 
-    expectType<boolean | undefined>(props.bool)
+    expectType<boolean>(props.bool)
     expectType<boolean>(props.boolDef)
     expectType<boolean>(props.boolRequired)
 
@@ -105,5 +105,5 @@ defineComponent({
     expectType<string | number | undefined>(props.oneOfType)
     expectType<string | number>(props.oneOfTypeDef)
     expectType<string | number>(props.oneOfTypeRequired)
-  },
+  }
 })
