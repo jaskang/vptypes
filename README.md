@@ -1,5 +1,10 @@
 # VpTypes
 
+[![npm](https://img.shields.io/npm/v/vptypes)](https://www.npmjs.com/package/vptypes)
+[![GitHub license](https://img.shields.io/github/license/JasKang/vptypes)](https://github.com/JasKang/vptypes/blob/main/LICENSE)
+
+##
+
 ### Basic usage
 
 ```ts
@@ -74,7 +79,7 @@ props: Readonly<{
 
 ```ts
 props: {
-  type: VpTypes.oneOfString(['success', 'warning', 'info', 'error'] as const).def('info'),
+  type: VpTypes.oneOfString(['success', 'warning', 'info', 'error']).def('info'),
 }
 
 ///////////////[ type ]///////////////////

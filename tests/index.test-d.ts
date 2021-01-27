@@ -1,6 +1,6 @@
 import { expectType } from 'tsd'
 import { defineComponent } from 'vue'
-import { VpTypes } from '../'
+import { VpTypes } from '../src'
 
 // any()
 // string<T extends string = string>()
@@ -53,13 +53,13 @@ defineComponent({
     hexColorDef: VpTypes.hexColor().def('#ffffff'),
     hexColorRequired: VpTypes.hexColor().isRequired,
 
-    oneOfString: VpTypes.oneOfString(['a', 'b'] as const),
-    oneOfStringDef: VpTypes.oneOfString(['a', 'b'] as const).def('a'),
-    oneOfStringRequired: VpTypes.oneOfString(['a', 'b'] as const).isRequired,
+    oneOfString: VpTypes.oneOfString(['a', 'b']),
+    oneOfStringDef: VpTypes.oneOfString(['a', 'b']).def('a'),
+    oneOfStringRequired: VpTypes.oneOfString(['a', 'b']).isRequired,
 
-    oneOfType: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()] as const),
-    oneOfTypeDef: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()] as const).def('sdf'),
-    oneOfTypeRequired: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()] as const).isRequired
+    oneOfType: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()]),
+    oneOfTypeDef: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()]).def('sdf'),
+    oneOfTypeRequired: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()]).isRequired
   },
   setup(props) {
     expectType<string | undefined>(props.string)

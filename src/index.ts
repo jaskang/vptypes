@@ -9,7 +9,7 @@ const TYPES = {
   array: Array,
   object: Object,
   function: Function,
-  any: null,
+  any: null
 } as const
 
 type TYPESKEYS = keyof typeof TYPES
@@ -43,7 +43,7 @@ function createType<T>(type: TYPESKEYS | TYPESKEYS[], validator?: validatorType)
     typeName: type,
     typeChecker: (null as unknown) as T,
     type: Array.isArray(type)
-      ? type.map((i) => {
+      ? type.map(i => {
           return TYPES[i]
         })
       : TYPES[type],
@@ -55,7 +55,7 @@ function createType<T>(type: TYPESKEYS | TYPESKEYS[], validator?: validatorType)
     get isRequired() {
       this.required = true
       return this
-    },
+    }
   } as VPropOptions<T>
 }
 
@@ -109,18 +109,18 @@ export class VpTypes {
     })
     return prop
   }
-  static oneOfString<T extends readonly string[]>(list: T) {
+  static oneOfString<T extends V[], V extends string>(list: T) {
     const prop = createType<T[number]>('string', (value: unknown) => {
-      return list.indexOf(value as string) !== -1
+      return list.indexOf(value as V) !== -1
     })
     return prop
   }
-  static oneOfType<T extends readonly VPropOptions<any>[]>(list: T) {
-    const types = list.map((prop) => {
+  static oneOfType<T extends V[], V extends VPropOptions<any>>(list: T) {
+    const types = list.map(prop => {
       return prop.typeName
     })
     const validators = list
-      .map((prop) => {
+      .map(prop => {
         return prop.validator
       })
       .filter(Boolean) as validatorType[]
