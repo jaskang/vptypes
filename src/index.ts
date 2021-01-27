@@ -1,6 +1,6 @@
 import { PropType } from 'vue'
 
-export const TYPES = {
+const TYPES = {
   string: String,
   number: Number,
   boolean: Boolean,
@@ -9,114 +9,122 @@ export const TYPES = {
   array: Array,
   object: Object,
   function: Function,
-}
+  any: null,
+} as const
 
-export interface PropOptions<T = any, D = T> {
-  type?: PropType<T> | true | null
-  required?: boolean
-  default?: D | ((props: Record<string, unknown>) => D | null | undefined) | null | undefined | Record<string, unknown>
+type TYPESKEYS = keyof typeof TYPES
+
+// type DefaultFactory<T> = ((props: Record<string, unknown>) => T) | T
+
+type VPropOptions<T = any, D extends boolean = false, R extends boolean = false> = {
+  typeName: TYPESKEYS
+  typeChecker: T
+  type?: PropType<T>
   validator?(value: unknown): boolean
-}
+  def: (value: ((props: Record<string, unknown>) => T) | T) => VPropOptions<T, true, R>
+  readonly isRequired: VPropOptions<T, D, true>
+} & (D extends true
+  ? {
+      default: T
+    }
+  : {}) &
+  (R extends true
+    ? {
+        required: R
+      }
+    : {})
 
 type validatorType = (value: unknown) => boolean
 
 type HexColorType = `#${string}`
 
-// type AugmentedRequired<T extends any, K extends keyof T = keyof T> = Omit<T, K> & Required<Pick<T, K>>
-type VpProp<P, D = false, R = false> = {
-  _meta_: P
-  type?: PropType<P>
-  validator?: validatorType
-  required: R extends true ? true : false
-  def(value: P): VpProp<P, true, R>
-  readonly isRequired: VpProp<P, D, true>
-} & (D extends true
-  ? {
-      default: P
-    }
-  : {})
-
-function createType<P, D = false, R = false>(type?: unknown, validator?: validatorType): VpProp<P, false, R> {
+function createType<T>(type: TYPESKEYS | TYPESKEYS[], validator?: validatorType) {
   return {
-    _meta_: type as P,
-    type: type as PropType<P>,
+    typeName: type,
+    typeChecker: (null as unknown) as T,
+    type: Array.isArray(type)
+      ? type.map((i) => {
+          return TYPES[i]
+        })
+      : TYPES[type],
     validator: validator,
-    required: false as R extends true ? true : false,
-    def(value: P) {
-      this.deafult = value
-      return this as VpProp<P, true, R>
+    def(value) {
+      this.default = value
+      return this
     },
     get isRequired() {
       this.required = true
-      return this as VpProp<P, D, true>
+      return this
     },
-  }
+  } as VPropOptions<T>
 }
 
-export const VpTypes = {
-  any() {
-    const prop = createType<any>()
+// type ElementOf<T> = T extends Array<infer E> ? E : never
+
+export class VpTypes {
+  static any() {
+    const prop = createType<any>('any')
     return prop
-  },
-  string<T extends string = string>() {
-    const prop = createType<T>(String)
+  }
+  static string<T extends string = string>() {
+    const prop = createType<T>('string')
     return prop
-  },
-  number() {
-    const prop = createType<number>(Number)
+  }
+  static number() {
+    const prop = createType<number>('number')
     return prop
-  },
-  bool() {
-    const prop = createType<boolean>(Boolean).isRequired
+  }
+  static bool() {
+    const prop = createType<boolean>('boolean').isRequired
     return prop
-  },
-  symbol() {
-    const prop = createType(Symbol)
+  }
+  static symbol() {
+    const prop = createType<symbol>('symbol')
     return prop
-  },
-  object<T extends any = Record<string, unknown>>() {
-    const prop = createType<T>(Object)
+  }
+  static object<T extends Record<string, unknown>>() {
+    const prop = createType<T>('object')
     return prop
-  },
-  array<T extends any[]>() {
-    const prop = createType<T>(Array)
+  }
+  static array<T extends any[]>() {
+    const prop = createType<T>('array')
     return prop
-  },
-  func<T extends (...args: any) => any>() {
-    const prop = createType<T>(Function)
+  }
+  static func<T extends (...args: any) => any>() {
+    const prop = createType<T>('function')
     return prop
-  },
-  integer() {
-    const prop = createType<number>(Number, (value: unknown) => {
+  }
+  static integer() {
+    const prop = createType<number>('number', (value: unknown) => {
       return typeof value === 'number' && isFinite(value) && Math.floor(value) === value
     })
     return prop
-  },
-  hexColor() {
-    const prop = createType<HexColorType>(String, (value: unknown) => {
+  }
+  static hexColor() {
+    const prop = createType<HexColorType>('string', (value: unknown) => {
       if (typeof value === 'string') {
         return /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/.test(value)
       }
       return false
     })
     return prop
-  },
-  oneOfString<T extends readonly string[]>(list: T) {
-    const prop = createType<T[number]>(String, (value: unknown) => {
+  }
+  static oneOfString<T extends readonly string[]>(list: T) {
+    const prop = createType<T[number]>('string', (value: unknown) => {
       return list.indexOf(value as string) !== -1
     })
     return prop
-  },
-  oneOfType<T extends readonly VpProp<unknown>[]>(list: T) {
+  }
+  static oneOfType<T extends readonly VPropOptions<any>[]>(list: T) {
     const types = list.map((prop) => {
-      return prop.type
+      return prop.typeName
     })
     const validators = list
       .map((prop) => {
         return prop.validator
       })
       .filter(Boolean) as validatorType[]
-    const prop = createType<T[number]['_meta_']>(
+    const prop = createType<T[number]['typeChecker']>(
       types,
       validators.length > 0
         ? (value: unknown) => {
@@ -130,7 +138,7 @@ export const VpTypes = {
         : undefined
     )
     return prop
-  },
+  }
 }
 
 export default VpTypes

@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "strict": false,
+    "rootDir": ".",
+    "sourceMap": false,
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "lib": ["esnext", "dom"]
+  },
+  "include": ["src/**/*"]
+}
