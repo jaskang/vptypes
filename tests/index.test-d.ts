@@ -107,3 +107,10 @@ defineComponent({
     expectType<string | number>(props.oneOfTypeRequired)
   }
 })
+
+const a = ['a', 'b']
+
+const b = <T extends V[], V extends string>(arr: T) => {
+  return arr[0] as T[number]
+}
+const c = b(['a', 'b'])

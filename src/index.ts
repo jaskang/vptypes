@@ -14,14 +14,12 @@ const TYPES = {
 
 type TYPESKEYS = keyof typeof TYPES
 
-// type DefaultFactory<T> = ((props: Record<string, unknown>) => T) | T
-
 type VPropOptions<T = any, D extends boolean = false, R extends boolean = false> = {
   typeName: TYPESKEYS
   typeChecker: T
   type?: PropType<T>
   validator?(value: unknown): boolean
-  def: (value: ((props: Record<string, unknown>) => T) | T) => VPropOptions<T, true, R>
+  def: (value: ((props: any) => T) | T) => VPropOptions<T, true, R>
   readonly isRequired: VPropOptions<T, D, true>
 } & (D extends true
   ? {
@@ -82,7 +80,7 @@ export class VpTypes {
     const prop = createType<symbol>('symbol')
     return prop
   }
-  static object<T extends Record<string, unknown>>() {
+  static object<T extends any>() {
     const prop = createType<T>('object')
     return prop
   }
