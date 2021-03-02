@@ -1,6 +1,6 @@
 import { expectType } from 'tsd'
 import { defineComponent } from 'vue'
-import { VpTypes } from '../src'
+import vptypes from '../src'
 
 // any()
 // string<T extends string = string>()
@@ -21,56 +21,56 @@ interface TypeA {
 
 defineComponent({
   props: {
-    string: VpTypes.string(),
-    stringDef: VpTypes.string().def('/'),
-    stringRequired: VpTypes.string().isRequired,
+    string: vptypes.string(),
+    stringDef: vptypes.string().def('/'),
+    stringRequired: vptypes.string().isRequired,
 
-    number: VpTypes.number(),
-    numberDef: VpTypes.number().def(1),
-    numberRequired: VpTypes.number().isRequired,
+    number: vptypes.number(),
+    numberDef: vptypes.number().def(1),
+    numberRequired: vptypes.number().isRequired,
 
-    bool: VpTypes.bool(),
-    boolDef: VpTypes.bool().def(true),
-    boolRequired: VpTypes.bool().isRequired,
+    bool: vptypes.bool(),
+    boolDef: vptypes.bool().def(true),
+    boolRequired: vptypes.bool().isRequired,
 
-    symbol: VpTypes.symbol(),
-    symbolDef: VpTypes.symbol().def(Symbol(0)),
-    symbolRequired: VpTypes.symbol().isRequired,
+    symbol: vptypes.symbol(),
+    symbolDef: vptypes.symbol().def(Symbol(0)),
+    symbolRequired: vptypes.symbol().isRequired,
 
-    object: VpTypes.object(),
-    objectDef: VpTypes.object().def({}),
-    objectRequired: VpTypes.object().isRequired,
+    object: vptypes.object(),
+    objectDef: vptypes.object().def({}),
+    objectRequired: vptypes.object().isRequired,
 
-    objectT: VpTypes.object<TypeA>(),
-    objectTDef: VpTypes.object<TypeA>().def({
+    objectT: vptypes.object<TypeA>(),
+    objectTDef: vptypes.object<TypeA>().def({
       a: 'a',
       b: 'b'
     }),
-    objectTRequired: VpTypes.object<TypeA>().isRequired,
+    objectTRequired: vptypes.object<TypeA>().isRequired,
 
-    array: VpTypes.array<number[]>(),
-    arrayDef: VpTypes.array<number[]>().def([1]),
-    arrayRequired: VpTypes.array<number[]>().isRequired,
+    array: vptypes.array<number[]>(),
+    arrayDef: vptypes.array<number[]>().def([1]),
+    arrayRequired: vptypes.array<number[]>().isRequired,
 
-    func: VpTypes.func<() => boolean>(),
-    funcDef: VpTypes.func<() => boolean>().def(() => true),
-    funcRequired: VpTypes.func<() => boolean>().isRequired,
+    func: vptypes.func<() => boolean>(),
+    funcDef: vptypes.func<() => boolean>().def(() => true),
+    funcRequired: vptypes.func<() => boolean>().isRequired,
 
-    integer: VpTypes.integer(),
-    integerDef: VpTypes.integer().def(1),
-    integerRequired: VpTypes.integer().isRequired,
+    integer: vptypes.integer(),
+    integerDef: vptypes.integer().def(1),
+    integerRequired: vptypes.integer().isRequired,
 
-    hexColor: VpTypes.hexColor(),
-    hexColorDef: VpTypes.hexColor().def('#ffffff'),
-    hexColorRequired: VpTypes.hexColor().isRequired,
+    hexColor: vptypes.hexColor(),
+    hexColorDef: vptypes.hexColor().def('#ffffff'),
+    hexColorRequired: vptypes.hexColor().isRequired,
 
-    oneOfString: VpTypes.oneOfString(['a', 'b']),
-    oneOfStringDef: VpTypes.oneOfString(['a', 'b']).def('a'),
-    oneOfStringRequired: VpTypes.oneOfString(['a', 'b']).isRequired,
+    oneOfString: vptypes.oneOfString(['a', 'b']),
+    oneOfStringDef: vptypes.oneOfString(['a', 'b']).def('a'),
+    oneOfStringRequired: vptypes.oneOfString(['a', 'b']).isRequired,
 
-    oneOfType: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()]),
-    oneOfTypeDef: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()]).def('sdf'),
-    oneOfTypeRequired: VpTypes.oneOfType([VpTypes.string(), VpTypes.number()]).isRequired
+    oneOfType: vptypes.oneOfType([vptypes.string(), vptypes.number()]),
+    oneOfTypeDef: vptypes.oneOfType([vptypes.string(), vptypes.number()]).def('sdf'),
+    oneOfTypeRequired: vptypes.oneOfType([vptypes.string(), vptypes.number()]).isRequired
   },
   setup(props) {
     expectType<string | undefined>(props.string)
