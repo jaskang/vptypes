@@ -59,7 +59,7 @@ function createType<T>(type: TYPESKEYS | TYPESKEYS[], validator?: validatorType)
 
 // type ElementOf<T> = T extends Array<infer E> ? E : never
 
-export class VpTypes {
+class VpTypes {
   static any() {
     const prop = createType<any>('any')
     return prop
