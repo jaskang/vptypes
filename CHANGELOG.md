@@ -1,3 +1,10 @@
+## [0.1.3](https://github.com/JasKang/vptypes/compare/0.1.2...0.1.3) (2021-03-02)
+
+
+### Bug Fixes
+
+* remove export ([d6d1f57](https://github.com/JasKang/vptypes/commit/d6d1f572ddedf25e97736bd49592b868e4a6979f))
+
 ## [0.1.2](https://github.com/JasKang/vptypes/compare/0.1.1...0.1.2) (2021-03-02)
 
 
