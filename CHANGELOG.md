@@ -1,3 +1,10 @@
+## [0.1.2](https://github.com/JasKang/vptypes/compare/0.1.1...0.1.2) (2021-03-02)
+
+
+### Bug Fixes
+
+* object T extends any ([b19783b](https://github.com/JasKang/vptypes/commit/b19783bae9817b6667489402966101d679a72e45))
+
 ## [0.1.1](https://github.com/JasKang/vptypes/compare/0.1.0...0.1.1) (2021-01-27)
 
 
