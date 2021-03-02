@@ -14,6 +14,10 @@ import { VpTypes } from '../src'
 // hexColor()
 // oneOfString<T extends readonly string[]>(list: T)
 // oneOfType<T extends Array<VPropOptions<any>>>(list: T)
+interface TypeA {
+  a: string
+  b: string
+}
 
 defineComponent({
   props: {
@@ -36,6 +40,13 @@ defineComponent({
     object: VpTypes.object(),
     objectDef: VpTypes.object().def({}),
     objectRequired: VpTypes.object().isRequired,
+
+    objectT: VpTypes.object<TypeA>(),
+    objectTDef: VpTypes.object<TypeA>().def({
+      a: 'a',
+      b: 'b'
+    }),
+    objectTRequired: VpTypes.object<TypeA>().isRequired,
 
     array: VpTypes.array<number[]>(),
     arrayDef: VpTypes.array<number[]>().def([1]),
@@ -78,9 +89,13 @@ defineComponent({
     expectType<symbol>(props.symbolDef)
     expectType<symbol>(props.symbolRequired)
 
-    expectType<Record<string, unknown> | undefined>(props.object)
-    expectType<Record<string, unknown>>(props.objectDef)
-    expectType<Record<string, unknown>>(props.objectRequired)
+    expectType<Record<string, any> | undefined>(props.object)
+    expectType<Record<string, any>>(props.objectDef)
+    expectType<Record<string, any>>(props.objectRequired)
+
+    expectType<TypeA | undefined>(props.objectT)
+    expectType<TypeA>(props.objectTDef)
+    expectType<TypeA>(props.objectTRequired)
 
     expectType<number[] | undefined>(props.array)
     expectType<number[]>(props.arrayDef)
@@ -108,9 +123,9 @@ defineComponent({
   }
 })
 
-const a = ['a', 'b']
+// const a = ['a', 'b']
 
-const b = <T extends V[], V extends string>(arr: T) => {
-  return arr[0] as T[number]
-}
-const c = b(['a', 'b'])
+// const b = <T extends V[], V extends string>(arr: T) => {
+//   return arr[0] as T[number]
+// }
+// const c = b(['a', 'b'])

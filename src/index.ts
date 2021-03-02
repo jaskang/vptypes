@@ -80,7 +80,7 @@ export class VpTypes {
     const prop = createType<symbol>('symbol')
     return prop
   }
-  static object<T extends any>() {
+  static object<T = Record<string, any>>() {
     const prop = createType<T>('object')
     return prop
   }
