@@ -12,20 +12,18 @@ const TYPES = {
   any: null
 } as const
 
-type TYPESKEYS = keyof typeof TYPES
+export type TypeKey = keyof typeof TYPES
 
-export type AugmentedRequired<T extends object, K extends keyof T = keyof T> = Omit<T, K> & Required<Pick<T, K>>
+export type validatorType = (value: unknown) => boolean
 
-type validatorType = (value: unknown) => boolean
-
-class Prop<T, D extends boolean, R extends boolean> {
-  typeName: TYPESKEYS | TYPESKEYS[]
+export class Prop<T, D extends boolean, R extends boolean> {
+  typeName: TypeKey | TypeKey[]
   typeChecker: T
   default?: T
   type?: PropType<T>
   validator?: validatorType
   required: D extends true ? true : false
-  constructor(type: TYPESKEYS | TYPESKEYS[], validator?: (value: unknown) => boolean) {
+  constructor(type: TypeKey | TypeKey[], validator?: (value: unknown) => boolean) {
     this.typeName = type
     this.type = ((Array.isArray(type)
       ? type.map(i => {
@@ -105,7 +103,7 @@ const vptypes = {
   oneOfType<T extends V[], V extends Prop<any, false, false>>(list: T) {
     const types = list.map(prop => {
       return prop.typeName
-    }) as TYPESKEYS[]
+    }) as TypeKey[]
     const validators = list
       .map(prop => {
         return prop.validator
