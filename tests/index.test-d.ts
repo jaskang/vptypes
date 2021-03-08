@@ -89,9 +89,9 @@ defineComponent({
     expectType<symbol>(props.symbolDef)
     expectType<symbol>(props.symbolRequired)
 
-    expectType<Record<string, any> | undefined>(props.object)
-    expectType<Record<string, any>>(props.objectDef)
-    expectType<Record<string, any>>(props.objectRequired)
+    expectType<object | undefined>(props.object)
+    expectType<object>(props.objectDef)
+    expectType<object>(props.objectRequired)
 
     expectType<TypeA | undefined>(props.objectT)
     expectType<TypeA>(props.objectTDef)
