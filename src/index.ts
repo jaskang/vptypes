@@ -49,8 +49,8 @@ const vptypes = {
     const prop = new Prop<any, false, false>('any')
     return prop
   },
-  string() {
-    const prop = new Prop<string, false, false>('string')
+  string<T extends string>() {
+    const prop = new Prop<T, false, false>('string')
     return prop
   },
   oneOfString<T extends V[], V extends string>(list: T) {
