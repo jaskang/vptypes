@@ -109,9 +109,9 @@ defineComponent({
     expectType<number>(props.integerDef)
     expectType<number>(props.integerRequired)
 
-    expectType<`#${string}` | undefined>(props.hexColor)
-    expectType<`#${string}`>(props.hexColorDef)
-    expectType<`#${string}`>(props.hexColorRequired)
+    expectType<string | undefined>(props.hexColor)
+    expectType<string>(props.hexColorDef)
+    expectType<string>(props.hexColorRequired)
 
     expectType<'a' | 'b' | undefined>(props.oneOfString)
     expectType<'a' | 'b'>(props.oneOfStringDef)
@@ -122,10 +122,3 @@ defineComponent({
     expectType<string | number>(props.oneOfTypeRequired)
   }
 })
-
-// const a = ['a', 'b']
-
-// const b = <T extends V[], V extends string>(arr: T) => {
-//   return arr[0] as T[number]
-// }
-// const c = b(['a', 'b'])
