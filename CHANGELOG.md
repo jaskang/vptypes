@@ -1,3 +1,10 @@
+## [0.1.6](https://github.com/JasKang/vptypes/compare/0.1.5...0.1.6) (2021-03-08)
+
+
+### Bug Fixes
+
+* string 支持泛型 ([7d2ce7f](https://github.com/JasKang/vptypes/commit/7d2ce7fee2871e546144ef00b49678db172dd9e1))
+
 ## [0.1.5](https://github.com/JasKang/vptypes/compare/0.1.4...0.1.5) (2021-03-08)
 
 ## [0.1.4](https://github.com/JasKang/vptypes/compare/0.1.3...0.1.4) (2021-03-08)
