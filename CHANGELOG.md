@@ -1,3 +1,10 @@
+## [0.1.7](https://github.com/JasKang/vptypes/compare/0.1.6...0.1.7) (2021-03-09)
+
+
+### Bug Fixes
+
+* fix: oneOfType ([7e477c4](https://github.com/JasKang/vptypes/commit/7e477c4908ebffc6710338683df80bf28b97ff17))
+
 ## [0.1.6](https://github.com/JasKang/vptypes/compare/0.1.5...0.1.6) (2021-03-08)
 
 
