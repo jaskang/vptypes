@@ -100,7 +100,7 @@ const vptypes = {
     return prop
   },
 
-  oneOfType<T extends V[], V extends Prop<any, false, false>>(list: T) {
+  oneOfType<T extends V[], V extends Prop<any, boolean, boolean>>(list: T) {
     const types = list.map(prop => {
       return prop.typeName
     }) as TypeKey[]

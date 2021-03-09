@@ -68,9 +68,9 @@ defineComponent({
     oneOfStringDef: vptypes.oneOfString(['a', 'b']).def('a'),
     oneOfStringRequired: vptypes.oneOfString(['a', 'b']).isRequired,
 
-    oneOfType: vptypes.oneOfType([vptypes.string(), vptypes.number()]),
-    oneOfTypeDef: vptypes.oneOfType([vptypes.string(), vptypes.number()]).def('sdf'),
-    oneOfTypeRequired: vptypes.oneOfType([vptypes.string(), vptypes.number()]).isRequired
+    oneOfType: vptypes.oneOfType([vptypes.bool(), vptypes.number()]),
+    oneOfTypeDef: vptypes.oneOfType([vptypes.bool(), vptypes.number()]).def(1),
+    oneOfTypeRequired: vptypes.oneOfType([vptypes.bool(), vptypes.number()]).isRequired
   },
   setup(props) {
     expectType<string | undefined>(props.string)
@@ -117,8 +117,8 @@ defineComponent({
     expectType<'a' | 'b'>(props.oneOfStringDef)
     expectType<'a' | 'b'>(props.oneOfStringRequired)
 
-    expectType<string | number | undefined>(props.oneOfType)
-    expectType<string | number>(props.oneOfTypeDef)
-    expectType<string | number>(props.oneOfTypeRequired)
+    expectType<boolean | number | undefined>(props.oneOfType)
+    expectType<boolean | number>(props.oneOfTypeDef)
+    expectType<boolean | number>(props.oneOfTypeRequired)
   }
 })
